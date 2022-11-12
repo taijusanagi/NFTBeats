@@ -7,12 +7,14 @@
   },
   "image": {
     "share": "img/share.png",
-    "header": "img/header_logo.png"
+    "icon": "img/icon.png",
+    "hero": "img/hero.png"
   },
   "mention": "NFTBeats",
   "style": {
     "color": {
       "bg": "#49545D",
+      "unit": "white",
       "accent": "#83A4CE",
       "brand": {
         "50": "#EDF2F8",
@@ -28,8 +30,8 @@
       },
       "text": {
         "primary": "gray.600",
-        "secondary": "gray.600",
-        "tertiary": "#EEEEEE"
+        "secondary": "gray.500",
+        "tertiary": "gray.200"
       }
     },
     "shadow": "md",

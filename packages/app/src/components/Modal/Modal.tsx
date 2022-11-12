@@ -22,7 +22,7 @@ export const Modal: React.FC<ModalProps> = ({ header, children, isOpen, onClose 
   return (
     <_Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
-      <ModalContent m="2" borderRadius={configJsonFile.style.radius}>
+      <ModalContent m="2" borderRadius={configJsonFile.style.radius} bg={configJsonFile.style.color.unit}>
         <ModalHeader>
           <Text fontSize="md" color={configJsonFile.style.color.text.primary} fontWeight="bold">
             {header}

@@ -1,6 +1,6 @@
 import { theme } from "@chakra-ui/pro-theme";
 import { extendTheme } from "@chakra-ui/react";
-import { darkTheme } from "@rainbow-me/rainbowkit";
+import { lightTheme } from "@rainbow-me/rainbowkit";
 
 import configJsonFile from "../../../config.json";
 
@@ -18,7 +18,7 @@ export const myChakraUITheme = extendTheme(
   theme
 );
 
-const rainbowKitTheme = darkTheme();
+const rainbowKitTheme = lightTheme();
 export const myRainbowKitTheme = {
   ...rainbowKitTheme,
   colors: {

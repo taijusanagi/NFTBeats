@@ -14,17 +14,25 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     <Flex minHeight={"100vh"} direction={"column"} bg={configJsonFile.style.color.bg}>
       <Container as="section" maxW="8xl">
         <Box as="nav" py="4">
-          <Flex justify="space-between" alignItems={"center"} h="12">
+          <Flex justify="space-between" alignItems={"center"} h="8">
             <Link href="/">
-              <Image src={configJsonFile.image.header} alt="logo" h="12" />
+              <Image src={configJsonFile.image.icon} alt="logo" h="8" />
             </Link>
-            <HStack>
-              <ConnectButton accountStatus={"address"} showBalance={false} chainStatus={"name"} />
+            <HStack spacing="4">
+              <Text color={configJsonFile.style.color.text.tertiary} fontWeight="bold">
+                <Link href="/">Stats</Link>
+              </Text>
+              <Text color={configJsonFile.style.color.text.tertiary} fontWeight="bold">
+                <Link href="/docs">API</Link>
+              </Text>
+              <Box>
+                <ConnectButton accountStatus={"address"} showBalance={false} chainStatus={"name"} />
+              </Box>
             </HStack>
           </Flex>
         </Box>
       </Container>
-      <Container maxW="xl" py="4" flex={1}>
+      <Container maxW="4xl" py="4" flex={1}>
         {children}
       </Container>
       <Container maxW="8xl">
