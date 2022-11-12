@@ -1,0 +1,10 @@
+{
+  "5": {
+    "key": "ethereum-testnet",
+    "name": "Ethereum Georli",
+    "currency": "ETH",
+    "rpc": "https://rpc.ankr.com/eth_goerli",
+    "explorer": { "name": "Etherscan", "url": "https://goerli.etherscan.io/" },
+    "deployments": { "test": "0xEE98c1f90FF6a11cb215f18A2a0616E8E696fE4b" }
+  }
+}
