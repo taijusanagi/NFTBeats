@@ -9,5 +9,30 @@
     "share": "img/share.png",
     "header": "img/header_logo.png"
   },
-  "mention": "NFTBeats"
+  "mention": "NFTBeats",
+  "style": {
+    "color": {
+      "bg": "#49545D",
+      "accent": "#83A4CE",
+      "brand": {
+        "50": "#EDF2F8",
+        "100": "#CCD9EB",
+        "200": "#ABC1DE",
+        "300": "#8AA9D1",
+        "400": "#6991C4",
+        "500": "#4879B7",
+        "600": "#3A6192",
+        "700": "#2B496E",
+        "800": "#1D3049",
+        "900": "#0E1825"
+      },
+      "text": {
+        "primary": "gray.600",
+        "secondary": "gray.600",
+        "tertiary": "#EEEEEE"
+      }
+    },
+    "shadow": "md",
+    "radius": "md"
+  }
 }

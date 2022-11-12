@@ -5,6 +5,8 @@ import { Layout } from "@/components/Layout";
 import { Modal } from "@/components/Modal";
 import { Unit } from "@/components/Unit";
 
+import configJsonFile from "../../config.json";
+
 const HomePage: NextPage = () => {
   const sampleModalDisclosure = useDisclosure();
 
@@ -12,8 +14,8 @@ const HomePage: NextPage = () => {
     <Layout>
       <Unit header="Header" description="Description">
         <Button
-          colorScheme={"brand"}
-          fontWeight={"bold"}
+          borderRadius={configJsonFile.style.radius}
+          shadow={configJsonFile.style.shadow}
           onClick={() => {
             sampleModalDisclosure.onOpen();
           }}

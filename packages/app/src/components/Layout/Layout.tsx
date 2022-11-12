@@ -11,12 +11,12 @@ export interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <Flex minHeight={"100vh"} direction={"column"}>
+    <Flex minHeight={"100vh"} direction={"column"} bg={configJsonFile.style.color.bg}>
       <Container as="section" maxW="8xl">
         <Box as="nav" py="4">
-          <Flex justify="space-between" alignItems={"center"} h="8">
+          <Flex justify="space-between" alignItems={"center"} h="12">
             <Link href="/">
-              <Image src={configJsonFile.image.header} alt="logo" h="8" />
+              <Image src={configJsonFile.image.header} alt="logo" h="12" />
             </Link>
             <HStack>
               <ConnectButton accountStatus={"address"} showBalance={false} chainStatus={"name"} />
@@ -29,11 +29,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       </Container>
       <Container maxW="8xl">
         <HStack justify={"space-between"}>
-          <Text fontSize={"xs"} color="gray.400" fontWeight={"medium"} py="4">
+          <Text fontSize={"xs"} color={configJsonFile.style.color.text.tertiary} fontWeight={"medium"} py="4">
             😘 {configJsonFile.mention}
           </Text>
           <Link href="https://github.com/taijusanagi/crossfarm" target={"_blank"}>
-            <Icon as={FaGithub} aria-label="github" color="gray.400" />
+            <Icon as={FaGithub} aria-label="github" color={configJsonFile.style.color.text.tertiary} />
           </Link>
         </HStack>
       </Container>

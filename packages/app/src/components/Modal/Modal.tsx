@@ -9,6 +9,8 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
+import configJsonFile from "../../../config.json";
+
 export interface ModalProps {
   header: string;
   children: React.ReactNode;
@@ -20,12 +22,12 @@ export const Modal: React.FC<ModalProps> = ({ header, children, isOpen, onClose 
   return (
     <_Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
-      <ModalContent m="2" borderRadius={"md"}>
+      <ModalContent m="2" borderRadius={configJsonFile.style.radius}>
         <ModalHeader>
-          <Text fontSize="md" color={"gray.600"} fontWeight="bold">
+          <Text fontSize="md" color={configJsonFile.style.color.text.primary} fontWeight="bold">
             {header}
           </Text>
-          <ModalCloseButton color={"gray.600"} />
+          <ModalCloseButton color={configJsonFile.style.color.text.secondary} />
         </ModalHeader>
         <ModalBody px="6" pb="8">
           {children}
