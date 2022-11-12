@@ -21,11 +21,6 @@ export class Sync {
     return transactions;
   }
 
-  async getTxHashesFromBlockNumbers(blockNumbers: number[]) {
-    const resolved = await Promise.all(blockNumbers.map((blockNumber) => this.getTxHashesFromBlockNumber(blockNumber)));
-    return resolved.flat();
-  }
-
   async getERC721TransferLogsFromHash(txHash: string) {
     const { logs } = await this.provider.getTransactionReceipt(txHash);
     return logs
@@ -45,10 +40,5 @@ export class Sync {
           tokenId: tokenId.toString(),
         };
       });
-  }
-
-  async getERC721TransferLogsFromHashes(txHashes: string[]) {
-    const resolved = await Promise.all(txHashes.map((txHash) => this.getERC721TransferLogsFromHash(txHash)));
-    return resolved.flat();
   }
 }
