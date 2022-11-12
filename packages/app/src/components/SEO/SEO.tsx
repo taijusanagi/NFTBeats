@@ -13,7 +13,7 @@ export const SEO = () => {
       <meta property="og:title" content={configJsonFile.name} />
       <meta property="og:site_name" content={configJsonFile.name} />
       <meta property="og:description" content={configJsonFile.description} />
-      <meta property="og:image" content={configJsonFile.image.share} />
+      <meta property="og:image" content={`${configJsonFile.url.app}/${configJsonFile.image.share}`} />
       <meta name="twitter:card" content={"summary_large_image"} />
     </NextHead>
   );

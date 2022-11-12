@@ -3,6 +3,8 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import React from "react";
 import { FaGithub } from "react-icons/fa";
 
+import configJsonFile from "../../../config.json";
+
 export interface LayoutProps {
   children: React.ReactNode;
 }
@@ -14,7 +16,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         <Box as="nav" py="4">
           <Flex justify="space-between" alignItems={"center"} h="8">
             <Link href="/">
-              <Image src="/img/corn.png" alt="logo" h="6" />
+              <Image src={configJsonFile.image.header} alt="logo" h="8" />
             </Link>
             <HStack>
               <ConnectButton accountStatus={"address"} showBalance={false} chainStatus={"name"} />
@@ -28,9 +30,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       <Container maxW="8xl">
         <HStack justify={"space-between"}>
           <Text fontSize={"xs"} color="gray.400" fontWeight={"medium"} py="4">
-            <Link href="https://moralis.io/google-hackathon/" target={"_blank"}>
-              😘
-            </Link>
+            😘 {configJsonFile.mention}
           </Text>
           <Link href="https://github.com/taijusanagi/crossfarm" target={"_blank"}>
             <Icon as={FaGithub} aria-label="github" color="gray.400" />

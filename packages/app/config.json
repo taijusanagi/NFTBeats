@@ -2,11 +2,12 @@
   "name": "Name",
   "description": "Description",
   "url": {
-    "app": "",
-    "github": ""
+    "app": "https://nftbeats.vercel.app",
+    "github": "https://github.com/taijusanagi/NFTBeats"
   },
   "image": {
-    "share": ""
+    "share": "img/share.png",
+    "header": "img/header_logo.png"
   },
-  "mention": "mention"
+  "mention": "NFTBeats"
 }
