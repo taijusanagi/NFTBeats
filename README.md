@@ -14,3 +14,9 @@ We're inspired by Dune Analytics and Ultra Sound Money, two industry leaders in 
 yarn
 yarn dev
 ```
+
+### Default DB URL
+
+```
+export POSTGRES_CONNECTION=postgres://postgres:postgrespassword@localhost:5432/postgres
+```

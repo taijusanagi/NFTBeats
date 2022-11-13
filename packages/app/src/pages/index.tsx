@@ -14,7 +14,7 @@ const HomePage: NextPage = () => {
 
   return (
     <Layout>
-      <Flex justify={"center"} p="12">
+      <Flex justify={"center"} p="8">
         <Image src={configJsonFile.image.hero} alt="logo" h="20" />
       </Flex>
       <Stack spacing="4">

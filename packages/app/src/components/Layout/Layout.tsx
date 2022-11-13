@@ -18,7 +18,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             <Link href="/">
               <Image src={configJsonFile.image.icon} alt="logo" h="8" />
             </Link>
-            <HStack spacing="4">
+            <HStack spacing="6">
               <Text color={configJsonFile.style.color.text.tertiary} fontWeight="bold">
                 <Link href="/">Stats</Link>
               </Text>

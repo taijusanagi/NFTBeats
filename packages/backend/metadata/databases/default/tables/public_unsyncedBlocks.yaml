@@ -1,0 +1,3 @@
+table:
+  name: unsyncedBlocks
+  schema: public

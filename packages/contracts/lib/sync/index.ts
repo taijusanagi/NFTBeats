@@ -22,11 +22,15 @@ export class Sync {
   }
 
   async getERC721TransferLogsFromHash(txHash: string) {
-    const { logs } = await this.provider.getTransactionReceipt(txHash);
-    return logs
+    const transactionReceipt = await this.provider.getTransactionReceipt(txHash);
+    if (!transactionReceipt) {
+      return [];
+    }
+    return transactionReceipt.logs
       .filter(({ topics }) => topics[0] === ERC721_TRANSFER_TOPIC && topics.length === 4)
       .map((log) => {
-        const { blockNumber, transactionIndex, logIndex, address } = log;
+        console.log(log);
+        const { blockNumber, transactionIndex, logIndex, address: contract } = log;
         const {
           args: { from, to, tokenId },
         } = transferInterface.parseLog(log);
@@ -34,7 +38,7 @@ export class Sync {
           blockNumber,
           transactionIndex,
           logIndex,
-          address,
+          contract,
           from,
           to,
           tokenId: tokenId.toString(),
