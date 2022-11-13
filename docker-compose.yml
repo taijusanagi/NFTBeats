@@ -12,13 +12,13 @@ services:
   graphql-engine:
     image: hasura/graphql-engine:v2.15.0.cli-migrations-v3
     ports:
-      - "8080:8080"
+      - "3001:3001"
     depends_on:
       - "postgres"
     restart: always
     volumes:
-      - ./packages/backend/migrations:/hasura-migrations
-      - ./packages/backend/metadata:/hasura-metadata
+      - ./packages/graphql-engine/migrations:/hasura-migrations
+      - ./packages/graphql-engine/metadata:/hasura-metadata
     environment:
       ## postgres database to store Hasura metadata
       HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
@@ -33,5 +33,7 @@ services:
       # HASURA_GRAPHQL_CONSOLE_ASSETS_DIR: /srv/console-assets
       ## uncomment next line to set an admin secret
       # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+      HASURA_GRAPHQL_SERVER_PORT: 3001
+
 volumes:
   db_data:

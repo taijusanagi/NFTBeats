@@ -4,7 +4,6 @@ import {
   blockNumberSyncChunkSize,
   blockNumberSyncTimeout,
   chainId,
-  port as _port,
   txHashSyncConcurrency,
   txHashSyncTimeout,
 } from "./config/default";
@@ -29,7 +28,7 @@ app.post("/sync-latest-block", async (req, res) => {
   res.send(`ok`);
 });
 
-const port = process.env.PORT || _port;
+const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`);

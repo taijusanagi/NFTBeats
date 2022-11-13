@@ -4,9 +4,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "lint": "next lint",
     "dev": "next dev",
     "build": "next build",
-    "lint": "next lint"
+    "start": "next start"
   },
   "dependencies": {
     "@chakra-ui/pro-theme": "^0.0.57",

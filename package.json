@@ -24,7 +24,10 @@
     "prebuild:contracts": "yarn workspace @nftbeats/contracts build",
     "prebuild:graphql-engine": "yarn workspace @nftbeats/graphql-engine build",
     "build": "run-p build:*",
-    "build:app": "yarn workspace @nftbeats/app build"
+    "build:app": "yarn workspace @nftbeats/app build",
+    "build:backend": "yarn workspace @nftbeats/backend build",
+    "start": "yarn workspace @nftbeats/backend start",
+    "deploy": "gcloud run deploy nftbeats-backend --source . --region asia-northeast1 --no-allow-unauthenticated"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
