@@ -43,9 +43,3 @@ https://tpunks.com/
 yarn
 yarn dev
 ```
-
-### Default DB URL
-
-```
-export POSTGRES_CONNECTION=postgres://postgres:postgrespassword@localhost:5432/postgres
-```

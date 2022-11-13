@@ -15,13 +15,16 @@
     "lint:contracts": "yarn workspace @nftbeats/contracts lint",
     "test": "run-p test:*",
     "test:contracts": "yarn workspace @nftbeats/contracts test",
-    "predev": "yarn build:contracts",
+    "predev": "yarn prebuild",
     "dev": "run-p dev:*",
     "dev:app": "yarn workspace @nftbeats/app dev",
     "dev:backend": "yarn workspace @nftbeats/backend dev",
+    "dev:graphql-engine": "yarn workspace @nftbeats/graphql-engine dev",
+    "prebuild": "run-p prebuild:*",
+    "prebuild:contracts": "yarn workspace @nftbeats/contracts build",
+    "prebuild:graphql-engine": "yarn workspace @nftbeats/graphql-engine build",
     "build": "run-p build:*",
-    "build:app": "yarn workspace @nftbeats/app build",
-    "build:contracts": "yarn workspace @nftbeats/contracts build"
+    "build:app": "yarn workspace @nftbeats/app build"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",

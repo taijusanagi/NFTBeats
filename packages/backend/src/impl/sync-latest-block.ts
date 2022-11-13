@@ -1,10 +1,10 @@
 import { Promise } from "bluebird";
 
 import { parseERC721TransferLogs } from "../../../contracts/lib/parse";
+import { TronProvider } from "../../../contracts/lib/tron-provider";
 import networkJsonFile from "../../../contracts/network.json";
 import { ChainId } from "../../../contracts/types/ChainId";
 import { models } from "../lib/sequelize";
-import { TronProvider } from "../lib/tron/provider";
 import { getTimeDiff } from "../lib/utils/time";
 
 export const syncLatestBlock = async (
@@ -69,7 +69,8 @@ export const syncLatestBlock = async (
       blockNumberChunks = [];
       if (getBlockResolved) {
         const blockRecords = getBlockResolved.map(({ number, timestamp }) => {
-          return { blockNumber: Number(number), timestamp: new Date(timestamp) };
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          return { blockNumber: Number(number), timestamp: Number(timestamp) as any };
         });
         const txHashes: string[] = getBlockResolved.map(({ transactions }) => transactions).flat();
         console.log("txhashesLength:", txHashes.length);
@@ -90,7 +91,7 @@ export const syncLatestBlock = async (
             await models.SyncedBlock.bulkCreate(blockRecords, { ignoreDuplicates: true });
             await models.Transfer.bulkCreate(transferRecords, { ignoreDuplicates: true });
           } catch (e) {
-            console.log("sync fail at saving transfer records");
+            console.log("sync fail at saving records");
             databaseFail++;
           }
         }
