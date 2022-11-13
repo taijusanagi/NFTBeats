@@ -1,6 +1,6 @@
 import { HttpNetworkUserConfig } from "hardhat/types";
 
-import networkJsonFile from "../../network.json";
+import networkJsonFile from "../network.json";
 
 export const getNetworksUserConfigs = (mnemonic: string, ignoredChainIds?: string[]) => {
   const networksUserConfigs: { [key: string]: HttpNetworkUserConfig } = {};

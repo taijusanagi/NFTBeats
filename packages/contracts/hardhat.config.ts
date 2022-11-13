@@ -7,8 +7,8 @@ import "hardhat-dependency-compiler";
 import * as dotenv from "dotenv";
 import { HardhatUserConfig } from "hardhat/config";
 
-import { getMnemonic } from "./lib/loader/mnemonic";
-import { getNetworksUserConfigs } from "./lib/loader/network";
+import { getMnemonic } from "./lib/mnemonic";
+import { getNetworksUserConfigs } from "./lib/network";
 import networkJsonFile from "./network.json";
 
 dotenv.config();
