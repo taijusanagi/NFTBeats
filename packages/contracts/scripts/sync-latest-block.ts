@@ -38,19 +38,29 @@ async function main() {
     limit: 1,
     order: [["blockNumber", "DESC"]],
   });
-  const fromBlockNumber = latestSyncedBlock ? latestSyncedBlock.blockNumber : 0;
-  const toBlockNumber = await provider.getBlockNumber();
+  const latestSyncedBlockNumber = latestSyncedBlock ? latestSyncedBlock.blockNumber : 0;
+  const currentBlockNumber = await provider.getBlockNumber();
+
+  const fromBlockNumber = currentBlockNumber;
+  const toBlockNumber = latestSyncedBlockNumber;
 
   console.log("fromBlockNumber              :  ", fromBlockNumber);
   console.log("toBlockNumber                :  ", toBlockNumber);
 
-  for (let blockNumber = fromBlockNumber; blockNumber <= toBlockNumber; blockNumber++) {
+  for (let blockNumber = currentBlockNumber; blockNumber > latestSyncedBlockNumber; blockNumber--) {
     blockNumberChunks.push(blockNumber);
-    if (blockNumberChunks.length >= blockNumberSyncChunkSize || blockNumber >= toBlockNumber) {
+    if (blockNumberChunks.length >= blockNumberSyncChunkSize || blockNumber >= latestSyncedBlockNumber + 1) {
       console.log("blockNumberRange:", blockNumberChunks[0], blockNumberChunks[blockNumberChunks.length - 1]);
       const getBlockResolved = await Promise.map(
         blockNumberChunks,
-        (blockNumber) => provider.getBlock(blockNumber).then(({ transactions }) => transactions),
+        (blockNumber) =>
+          provider.getBlock(blockNumber).then(({ number, timestamp, transactions }) => {
+            return {
+              number,
+              timestamp,
+              transactions,
+            };
+          }),
         {
           concurrency: blockNumberSyncChunkSize,
         }
@@ -60,12 +70,12 @@ async function main() {
           console.log("block sync fail:", e.message);
           blockSyncFail++;
         });
-      const blockRecords = blockNumberChunks.map((blockNumber) => {
-        return { blockNumber };
-      });
       blockNumberChunks = [];
       if (getBlockResolved) {
-        const txHashes: string[] = getBlockResolved.flat();
+        const blockRecords = getBlockResolved.map(({ number, timestamp }) => {
+          return { blockNumber: Number(number), timestamp: Number(timestamp) };
+        });
+        const txHashes: string[] = getBlockResolved.map(({ transactions }) => transactions).flat();
         console.log("txhashesLength:", txHashes.length);
         const erc721TransferLogsBeforeflat = await Promise.map(
           txHashes,

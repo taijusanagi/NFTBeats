@@ -1,5 +1,11 @@
 import { ethers } from "ethers";
 
+export interface Block {
+  number: string;
+  timestamp: string;
+  transactions: string[];
+}
+
 export class TronProvider {
   provider: ethers.providers.JsonRpcProvider;
 
@@ -12,8 +18,11 @@ export class TronProvider {
   }
 
   async getBlock(blockNumber: number) {
-    const result = await this.provider.send("eth_getBlockByNumber", [ethers.utils.hexlify(blockNumber), false]);
-    return result;
+    const { number, timestamp, transactions }: Block = await this.provider.send("eth_getBlockByNumber", [
+      ethers.utils.hexlify(blockNumber),
+      false,
+    ]);
+    return { number, timestamp, transactions };
   }
 
   async getTransactionReceipt(txHash: string) {
