@@ -6,5 +6,13 @@
     "rpc": "https://rpc.ankr.com/eth_goerli",
     "explorer": { "name": "Etherscan", "url": "https://goerli.etherscan.io/" },
     "deployments": { "test": "0xEE98c1f90FF6a11cb215f18A2a0616E8E696fE4b" }
+  },
+  "728126428": {
+    "key": "tron",
+    "name": "Tron",
+    "currency": "TRX",
+    "rpc": "https://api.trongrid.io/jsonrpc",
+    "explorer": { "name": "TronScan", "url": "https://tronscan.org/" },
+    "deployments": { "test": "" }
   }
 }

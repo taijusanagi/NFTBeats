@@ -1,20 +1,25 @@
 import { Promise } from "bluebird";
 
 import { models } from "../../backend/src/sequelize";
-import { Sync } from "../lib/sync";
-import { getTimeDiff } from "../lib/utils";
+import { TronProvider } from "../lib/tron/provider";
+import { parseERC721TransferLogs } from "../lib/utils/parse";
+import { getTimeDiff } from "../lib/utils/time";
 import networkJsonFile from "../network.json";
 
-const chainId = "5";
-
-const blockNumberSyncChunkSize = 10;
+const blockNumberSyncChunkSize = 1;
 const blockNumberSyncTimeout = 10000;
 
-const txHashSyncConcurrency = 100;
-const txHashSyncTimeout = 10000;
+const txHashSyncConcurrency = 10;
+const txHashSyncTimeout = 100000;
 
 async function main() {
-  const sync = new Sync(networkJsonFile[chainId].rpc);
+  // Georli
+  // const chainId = "5";
+  // const provider = new ethers.providers.JsonRpcProvider(networkJsonFile[chainId].rpc);
+
+  // Tron
+  const chainId = "728126428";
+  const provider = new TronProvider(networkJsonFile[chainId].rpc);
 
   let blockNumberChunks: number[] = [];
   let blockSyncFail = 0;
@@ -23,16 +28,18 @@ async function main() {
 
   const startAt = new Date();
   console.log("startAt                      :  ", startAt);
+
   console.log("blockNumberSyncChunkSize     :  ", blockNumberSyncChunkSize);
   console.log("blockNumberSyncTimeout       :  ", blockNumberSyncTimeout);
   console.log("txHashSyncConcurrency        :  ", txHashSyncConcurrency);
   console.log("txHashSyncTimeout            :  ", txHashSyncTimeout);
 
-  const [{ blockNumber: fromBlockNumber }] = await models.SyncedBlock.findAll({
+  const [latestSyncedBlock] = await models.SyncedBlock.findAll({
     limit: 1,
     order: [["blockNumber", "DESC"]],
   });
-  const toBlockNumber = await sync.getBlockNumber();
+  const fromBlockNumber = latestSyncedBlock ? latestSyncedBlock.blockNumber : 0;
+  const toBlockNumber = await provider.getBlockNumber();
 
   console.log("fromBlockNumber              :  ", fromBlockNumber);
   console.log("toBlockNumber                :  ", toBlockNumber);
@@ -41,10 +48,12 @@ async function main() {
     blockNumberChunks.push(blockNumber);
     if (blockNumberChunks.length >= blockNumberSyncChunkSize || blockNumber >= toBlockNumber) {
       console.log("blockNumberRange:", blockNumberChunks[0], blockNumberChunks[blockNumberChunks.length - 1]);
-      const getTxHashesFromBlockNumberResolved = await Promise.map(
+      const getBlockResolved = await Promise.map(
         blockNumberChunks,
-        (blockNumber) => sync.getTxHashesFromBlockNumber(blockNumber),
-        { concurrency: blockNumberSyncChunkSize }
+        (blockNumber) => provider.getBlock(blockNumber).then(({ transactions }) => transactions),
+        {
+          concurrency: blockNumberSyncChunkSize,
+        }
       )
         .timeout(blockNumberSyncTimeout)
         .catch((e) => {
@@ -55,12 +64,12 @@ async function main() {
         return { blockNumber };
       });
       blockNumberChunks = [];
-      if (getTxHashesFromBlockNumberResolved) {
-        const txHashes: string[] = getTxHashesFromBlockNumberResolved.flat();
+      if (getBlockResolved) {
+        const txHashes: string[] = getBlockResolved.flat();
         console.log("txhashesLength:", txHashes.length);
         const erc721TransferLogsBeforeflat = await Promise.map(
           txHashes,
-          (txHash) => sync.getERC721TransferLogsFromHash(txHash),
+          (txHash) => provider.getTransactionReceipt(txHash).then(({ logs }) => parseERC721TransferLogs(logs)),
           { concurrency: txHashSyncConcurrency }
         )
           .timeout(txHashSyncTimeout)
