@@ -1,9 +1,9 @@
 import { ethers } from "ethers";
 
-import IERC721Artifact from "../artifacts/@openzeppelin/contracts/token/ERC721/IERC721.sol/IERC721.json";
-
 export const ERC721_TRANSFER_TOPIC = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef";
-const transferInterface = new ethers.utils.Interface(IERC721Artifact.abi);
+const transferInterface = new ethers.utils.Interface([
+  "event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)",
+]);
 
 export const parseERC721TransferLogs = (logs: ethers.providers.Log[]) => {
   return logs

@@ -1,20 +1,18 @@
 import { Promise } from "bluebird";
 
-import { parseERC721TransferLogs } from "../../../contracts/lib/parse";
-import { TronProvider } from "../../../contracts/lib/tron-provider";
-import networkJsonFile from "../../../contracts/network.json";
-import { ChainId } from "../../../contracts/types/ChainId";
+import { parseERC721TransferLogs } from "../lib/contracts/parse";
 import { models } from "../lib/sequelize";
+import { TronProvider } from "../lib/tron/provider";
 import { getTimeDiff } from "../lib/utils/time";
 
 export const syncLatestBlock = async (
-  chainId: ChainId,
+  rpc: string,
   blockNumberSyncChunkSize: number,
   blockNumberSyncTimeout: number,
   txHashSyncConcurrency: number,
   txHashSyncTimeout: number
 ) => {
-  const provider = new TronProvider(networkJsonFile[chainId].rpc);
+  const provider = new TronProvider(rpc);
 
   let blockNumberChunks: number[] = [];
   let blockSyncFail = 0;

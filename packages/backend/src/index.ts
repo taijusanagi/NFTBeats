@@ -3,7 +3,7 @@ import express from "express";
 import {
   blockNumberSyncChunkSize,
   blockNumberSyncTimeout,
-  chainId,
+  rpc,
   txHashSyncConcurrency,
   txHashSyncTimeout,
 } from "./config/default";
@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 
 app.post("/sync-latest-block", async (req, res) => {
   await syncLatestBlock(
-    req.body.chainId || chainId,
+    process.env.RPC || rpc,
     req.body.blockNumberSyncChunkSize || blockNumberSyncChunkSize,
     req.body.blockNumberSyncTimeout || blockNumberSyncTimeout,
     req.body.txHashSyncConcurrency || txHashSyncConcurrency,

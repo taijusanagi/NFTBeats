@@ -7,3 +7,4 @@ export const txHashSyncConcurrency = 10;
 export const txHashSyncTimeout = 100000;
 
 export const dbConnection = "postgres://postgres:postgrespassword@localhost:5432/postgres";
+export const rpc = "https://api.trongrid.io/jsonrpc";

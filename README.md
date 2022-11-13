@@ -43,3 +43,5 @@ https://tpunks.com/
 yarn
 yarn dev
 ```
+
+postgres://postgres:|`[.ph[XC}Z;[V,&@34.146.86.0:5432/postgres
