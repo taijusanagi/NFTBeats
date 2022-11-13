@@ -12,6 +12,7 @@
     "prepare": "husky install",
     "lint": "run-p lint:*",
     "lint:app": "yarn workspace @nftbeats/app lint",
+    "lint:backend": "yarn workspace @nftbeats/backend lint",
     "lint:contracts": "yarn workspace @nftbeats/contracts lint",
     "test": "run-p test:*",
     "test:contracts": "yarn workspace @nftbeats/contracts test",
