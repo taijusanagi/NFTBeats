@@ -23,7 +23,7 @@
     "dev": "run-p dev:*",
     "dev:app": "yarn workspace @nftbeats/app dev",
     "dev:graphql-engine": "yarn workspace @nftbeats/graphql-engine dev",
-    "prebuild": "wait-on http-get://localhost:3001/healthz -t 300000 && run-p prebuild:*",
+    "prebuild": "run-p prebuild:*",
     "prebuild:contracts": "yarn workspace @nftbeats/contracts build",
     "build": "run-p build:*",
     "build:app": "yarn workspace @nftbeats/app build",
