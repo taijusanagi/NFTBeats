@@ -40,6 +40,10 @@ And data API should be very flexible, I used Hasura for the GraphQL engine and i
 
 ![how-it-works](./docs/how-it-works.jpg)
 
+## Plan
+
+![plan](./docs/plan.png)
+
 ## Others
 
 Data integrity is tested [here](./docs/data-integrity.md)
