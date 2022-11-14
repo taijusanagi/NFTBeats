@@ -23,4 +23,4 @@ Data integrity is tested
 
 - After running the sync, this result is acquired
 
-![block-sync-result](./docs/block-sync-result.png)
+![backend](./block-sync-result.png)
