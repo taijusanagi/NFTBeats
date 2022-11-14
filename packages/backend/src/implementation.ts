@@ -104,7 +104,7 @@ export const syncTransactions = async (transactionHashes: string[]) => {
   const result = await sequelize
     .transaction(async (t) => {
       const transactions = await models.Transaction.bulkCreate(transactionRecords, {
-        ignoreDuplicates: true,
+        updateOnDuplicate: ["isSynced"],
         transaction: t,
       });
       const transfers = await models.Transfer.bulkCreate(transferRecords, {

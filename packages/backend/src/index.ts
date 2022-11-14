@@ -17,8 +17,17 @@ app.get("/", (req, res) => {
   res.send(`ok`);
 });
 
-app.post("/sync", async (req, res) => {
+app.post("/cron", async (req, res) => {
   const { fromBlockNumber, toBlockNumber } = await getBlockNumberRange();
+  axios.post(`${env.appUrl}/sync`, { fromBlockNumber, toBlockNumber });
+  res.send({ status: "ok" });
+});
+
+app.post("/sync", async (req, res) => {
+  const { fromBlockNumber, toBlockNumber } = req.body;
+
+  console.log(fromBlockNumber, toBlockNumber);
+
   for (let blockNumber = toBlockNumber; blockNumber >= fromBlockNumber; blockNumber--) {
     axios
       .post(`${env.appUrl}/sync-blocks`, { blockNumbers: [blockNumber] })
