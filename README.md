@@ -26,6 +26,8 @@ That's where NFTBeats comes in. We're the service for tracking NFT on the TRON b
 
 ![api](./docs/api.png)
 
+NFTBeats only uses the open-source library and framework so that it can be run in any environment.
+
 ## Inspiration
 
 Dune Analytics and Moralis inspire us. Two industry leaders in the world of blockchain data aggregation. And just like them, we're committed to providing our users with the most accurate and up-to-date NFT information possible.
