@@ -1,12 +1,13 @@
 table:
-  name: blocks
+  name: nfts
   schema: public
 array_relationships:
   - name: transfers
     using:
       manual_configuration:
         column_mapping:
-          blockNumber: blockNumber
+          contract: contract
+          tokenId: tokenId
         insertion_order: null
         remote_table:
           name: transfers
@@ -15,7 +16,8 @@ select_permissions:
   - role: anonymous
     permission:
       columns:
-        - blockNumber
-        - timestamp
+        - tokenId
+        - contract
+        - holder
       filter: {}
       allow_aggregations: true

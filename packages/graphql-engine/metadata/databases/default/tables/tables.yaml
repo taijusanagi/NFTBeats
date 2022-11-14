@@ -1,2 +1,3 @@
 - "!include public_blocks.yaml"
+- "!include public_nfts.yaml"
 - "!include public_transfers.yaml"

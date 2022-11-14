@@ -1,13 +1,64 @@
+import { gql, useQuery } from "@apollo/client";
+import { useEffect, useState } from "react";
+
 import { Chart, Summary, Sync } from "@/types/data";
 
 export const useNFTBeatsData = () => {
+  const [transfersCount, setTransfersCount] = useState(0);
+  const [blocksCount, setBlocksCount] = useState(0);
+
+  const GET_TRANSFERS_COUNT = gql`
+    query GetTransfersCount {
+      transfers_aggregate {
+        aggregate {
+          count
+        }
+      }
+    }
+  `;
+
+  const GET_BLOCKS_COUNT = gql`
+    query GetBlocksCount {
+      blocks_aggregate {
+        aggregate {
+          count
+        }
+      }
+    }
+  `;
+
+  const { data: transfersCountData } = useQuery(GET_TRANSFERS_COUNT);
+  const { data: blocksCountData } = useQuery(GET_BLOCKS_COUNT);
+
+  useEffect(() => {
+    if (
+      !transfersCountData ||
+      !transfersCountData.transfers_aggregate ||
+      !transfersCountData.transfers_aggregate.aggregate ||
+      !transfersCountData.transfers_aggregate.aggregate.count
+    ) {
+      return;
+    }
+    setTransfersCount(transfersCountData.transfers_aggregate.aggregate.count);
+  }, [transfersCountData]);
+
+  useEffect(() => {
+    if (
+      !blocksCountData ||
+      !blocksCountData.blocks_aggregate ||
+      !blocksCountData.blocks_aggregate.aggregate ||
+      !blocksCountData.blocks_aggregate.aggregate.count
+    ) {
+      return;
+    }
+    setBlocksCount(blocksCountData.blocks_aggregate.aggregate.count);
+  }, [blocksCountData]);
+
   const sync: Sync = {
-    block: 0,
-    tx: 0,
+    block: blocksCount,
   };
   const summary: Summary = {
-    sumOfNFT: 0,
-    sumOfUniqueHolder: 0,
+    sumOfNFTTransfer: transfersCount,
   };
   const chart: Chart = {
     data: [

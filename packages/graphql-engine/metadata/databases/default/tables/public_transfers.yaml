@@ -23,3 +23,4 @@ select_permissions:
         - to
         - tokenId
       filter: {}
+      allow_aggregations: true

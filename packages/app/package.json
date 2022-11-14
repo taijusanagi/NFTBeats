@@ -10,6 +10,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.1",
+    "@apollo/react-hooks": "^4.0.0",
     "@chakra-ui/pro-theme": "^0.0.57",
     "@chakra-ui/react": "^2.3.6",
     "@emotion/react": "^11",

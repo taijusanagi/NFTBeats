@@ -19,16 +19,14 @@ const HomePage: NextPage = () => {
       </Flex>
       <Stack spacing="4">
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4}>
-          <Unit header="Status" description="Sync status">
+          <Unit header="Status" description="Sync status (synced from 45949758)">
             <Stack>
               <Info header="Synced Block" description={nftBeatsData.sync.block} />
-              <Info header="Synced Tx" description={nftBeatsData.sync.tx} />
             </Stack>
           </Unit>
           <Unit header="Summary" description="NFTBeats core values">
             <Stack>
-              <Info header="Minted NFT" description={nftBeatsData.summary.sumOfNFT} />
-              <Info header="Unique NFT Holder" description={nftBeatsData.summary.sumOfUniqueHolder} />
+              <Info header="NFT Transfer Count" description={nftBeatsData.summary.sumOfNFTTransfer} />
             </Stack>
           </Unit>
         </SimpleGrid>

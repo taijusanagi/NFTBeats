@@ -20,11 +20,18 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             </Link>
             <HStack spacing="6">
               <Text color={configJsonFile.style.color.text.tertiary} fontWeight="bold">
-                <Link href="/">Stats</Link>
+                <Link
+                  href={`https://cloud.hasura.io/public/graphiql?endpoint=${encodeURIComponent(
+                    process.env.NEXT_PUBLIC_GRAPHQL_URL || ""
+                  )}`}
+                  target={"_blank"}
+                >
+                  API
+                </Link>
               </Text>
               <Text color={configJsonFile.style.color.text.tertiary} fontWeight="bold">
                 <Link href="/docs/graphql/index.html" target={"_blank"}>
-                  API
+                  Docs
                 </Link>
               </Text>
               <Box>

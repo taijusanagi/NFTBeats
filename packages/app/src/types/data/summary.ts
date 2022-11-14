@@ -1,4 +1,3 @@
 export interface Summary {
-  sumOfNFT: number;
-  sumOfUniqueHolder: number;
+  sumOfNFTTransfer: number;
 }
