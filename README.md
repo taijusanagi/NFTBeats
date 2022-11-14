@@ -1,41 +1,46 @@
 # NFTBeats
 
-## Description
+![stats](./docs/stats.png)
 
-If you're into the world of NFTs, you know just how important it is to stay up-to-date on all the latest information. After all, there are a lot of opportunities to be made in this space - and you don't want to miss out on any opportunities.
+## Pitch Deck
 
-That's where NFTBeats comes in. We're the premiere service for tracking information on NFTs across all chains. With our easy-to-use platform, you can quickly and easily see how many NFTs have been minted on a particular chain and how many NFTs you own, by stats and API.
+https://docs.google.com/presentation/d/1BLt_GJLekwkryjkXHo1IYP6xhISbyIvDvtRaLiuKflc/edit?usp=sharing
 
-We're inspired by Dune Analytics, Ultra Sound Money, and L2Beats. Three industry leaders in the world of blockchain data visualization. And just like them, we're committed to providing our users with the most accurate and up-to-date information possible. So if you're serious about making an opportunity in the world of NFTs, then you need NFTBeat.
+## Demo Video
 
-## Problem Solved
+TBD
 
-- Aggregated NFT data is only available in the specific chain, and it makes BUIDL harder for the NFT projects developer
+## Deployed Service
 
-- NFT API is usually not open source. The community can not manage it
+https://nftbeats.vercel.app/
 
-## Tested Data Source
+## Problem to Solve
 
-### Service
+- Aggregated NFT data is only available in the specific chain, which makes it harder for the TRON NFT project
 
-https://tpunks.com/
+- NFT API is usually not open source. So The community can not manage it
 
-### Get Sample BlockNumber
+## Solution
 
-- This is the contract address
+That's where NFTBeats comes in. We're the service for tracking NFT on Tron blockchain. With our easy-to-use platform, you can quickly and easily see NFT-related data and also you can use it in your dApps with our open-source NFT API.
 
-  - https://tronscan.io/#/contract/TSUcxaqKMLoznNGF83jxe4eXCrpVzsP4Pn/code
+![api](./docs/api.png)
 
-- This is the token page
+## Inspiration
 
-  - https://tronscan.io/#/token721/TMCBfg4XDFTLCZapnwAVHypW2sm9hB3okZ
+We're inspired by L2Beats and Moralis. Two industry leaders in the world of blockchain data aggregation. And just like them, we're committed to providing our users with the most accurate and up-to-date NFT information possible.
 
-- This is the latest transfer tx, and get block number (45842579) from this tx
-  https://tronscan.io/#/transaction/5d9f2906711b769275dccec69680e622995519c2fd46ef7dc54a144b4294c9cc
+## Technical Challenge
 
-- After running the sync, this result is acquired
+Tron blockchain block-producing time is 3 seconds, which is much faster than Ethereum.
 
-![block-sync-result](./docs/block-sync-result.png)
+This speed makes data syncing a bit difficult, I had to build a parallel processing architecture by google cloud run.
+
+![how-it-works](./docs/how-it-works.jpg)
+
+## Others
+
+Data integrity is tested [here](./docs/data-integrity.md)
 
 ## Development
 
@@ -43,5 +48,3 @@ https://tpunks.com/
 yarn
 yarn dev
 ```
-
-postgres://postgres:|`[.ph[XC}Z;[V,&@34.146.86.0:5432/postgres
