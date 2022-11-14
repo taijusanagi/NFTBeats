@@ -22,19 +22,21 @@ https://nftbeats.vercel.app/
 
 ## Solution
 
-That's where NFTBeats comes in. We're the service for tracking NFT on Tron blockchain. With our easy-to-use platform, you can quickly and easily see NFT-related data and also you can use it in your dApps with our open-source NFT API.
+That's where NFTBeats comes in. We're the service for tracking NFT on Tron blockchain. With our easy-to-use platform, you can quickly and easily see NFT-related data and also you can use it in your dApps with our open-source API.
 
 ![api](./docs/api.png)
 
 ## Inspiration
 
-We're inspired by L2Beats and Moralis. Two industry leaders in the world of blockchain data aggregation. And just like them, we're committed to providing our users with the most accurate and up-to-date NFT information possible.
+We're inspired by Dune Analytics and Moralis. Two industry leaders in the world of blockchain data aggregation. And just like them, we're committed to providing our users with the most accurate and up-to-date NFT information possible.
 
 ## Technical Challenge
 
 Tron blockchain block-producing time is 3 seconds, which is much faster than Ethereum.
 
 This speed makes data syncing a bit difficult, I had to build a parallel processing architecture by google cloud run.
+
+And data API should be very flexible, I used Hasura for the GraphQL engine and it makes development much faster.
 
 ![how-it-works](./docs/how-it-works.jpg)
 
