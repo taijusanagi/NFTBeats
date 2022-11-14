@@ -1,5 +1,7 @@
 # NFTBeats
 
+NFTBeats is TRON-specific and very flexible GraphQL NFT API with beautiful stats.
+
 ![stats](./docs/stats.png)
 
 ## Pitch Deck

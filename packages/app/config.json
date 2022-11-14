@@ -1,6 +1,6 @@
 {
-  "name": "Name",
-  "description": "Description",
+  "name": "NFTBeats",
+  "description": "NFTBeats is TRON-specific and very flexible GraphQL NFT API with beautiful stats.",
   "url": {
     "app": "https://nftbeats.vercel.app",
     "github": "https://github.com/taijusanagi/NFTBeats"
