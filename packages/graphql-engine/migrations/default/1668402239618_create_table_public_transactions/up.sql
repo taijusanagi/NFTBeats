@@ -1,0 +1,1 @@
+CREATE TABLE "public"."transactions" ("blockNumber" integer NOT NULL, "transactionIndex" integer NOT NULL, "transactionHash" text NOT NULL, PRIMARY KEY ("blockNumber","transactionIndex") , UNIQUE ("transactionHash"));

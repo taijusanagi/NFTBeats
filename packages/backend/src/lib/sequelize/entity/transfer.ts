@@ -1,5 +1,4 @@
 import * as Sequelize from "sequelize";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { DataTypes, Model, Optional } from "sequelize";
 
 export interface TransferAttributes {
@@ -13,7 +12,6 @@ export interface TransferAttributes {
 }
 
 export type TransferPk = "blockNumber" | "transactionIndex" | "logIndex";
-// eslint-disable-next-line no-use-before-define
 export type TransferId = Transfer[TransferPk];
 export type TransferCreationAttributes = TransferAttributes;
 

@@ -18,11 +18,11 @@ export class TronProvider {
   }
 
   async getBlock(blockNumber: number) {
-    const { number, timestamp, transactions }: Block = await this.provider.send("eth_getBlockByNumber", [
+    const response: Block = await this.provider.send("eth_getBlockByNumber", [
       ethers.utils.hexlify(blockNumber),
       false,
     ]);
-    return { number, timestamp, transactions };
+    return response;
   }
 
   async getTransactionReceipt(txHash: string) {

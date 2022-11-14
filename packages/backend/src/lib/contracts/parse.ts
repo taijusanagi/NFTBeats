@@ -5,7 +5,7 @@ const transferInterface = new ethers.utils.Interface([
   "event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)",
 ]);
 
-export const parseERC721TransferLogs = (logs: ethers.providers.Log[]) => {
+export const getERC721TransfersFromLogs = (logs: ethers.providers.Log[]) => {
   return logs
     .filter(({ topics }) => topics[0] === ERC721_TRANSFER_TOPIC && topics.length === 4)
     .map((log) => {

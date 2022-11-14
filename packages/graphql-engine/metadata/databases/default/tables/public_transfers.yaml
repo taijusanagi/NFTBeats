@@ -9,5 +9,15 @@ object_relationships:
           blockNumber: blockNumber
         insertion_order: null
         remote_table:
-          name: syncedBlocks
+          name: blocks
+          schema: public
+  - name: transaction
+    using:
+      manual_configuration:
+        column_mapping:
+          blockNumber: blockNumber
+          transactionIndex: transactionIndex
+        insertion_order: null
+        remote_table:
+          name: transactions
           schema: public
