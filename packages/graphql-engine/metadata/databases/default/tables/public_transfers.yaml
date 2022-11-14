@@ -11,3 +11,15 @@ object_relationships:
         remote_table:
           name: blocks
           schema: public
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - blockNumber
+        - transactionIndex
+        - logIndex
+        - contract
+        - from
+        - to
+        - tokenId
+      filter: {}

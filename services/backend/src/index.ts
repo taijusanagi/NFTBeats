@@ -23,9 +23,9 @@ app.post("/sync", async (req, res) => {
 
   const { latestSyncedBlockNumber, currentBlockNumber, fromBlockNumber, toBlockNumber } = await getBlockNumberRange();
 
+  logger.info("sync-start: concurrency", env.concurrency);
   logger.info("sync-start: latestSyncedBlockNumber", latestSyncedBlockNumber);
   logger.info("sync-start: currentBlockNumber", currentBlockNumber);
-
   logger.info("sync-start: fromBlockNumber", fromBlockNumber);
   logger.info("sync-start: toBlockNumber", toBlockNumber);
 
@@ -33,18 +33,25 @@ app.post("/sync", async (req, res) => {
   let processedCount = 0;
   let okCount = 0;
   let errorCount = 0;
+  const failedBlockNumbers: number[] = [];
+
   const result = await new Promise((resolve) => {
     for (let blockNumber = toBlockNumber; blockNumber >= fromBlockNumber; blockNumber--) {
       axios
-        .post(`${env.appUrl}/sync-blocks`, { blockNumbers: [blockNumber] })
+        .post(`${env.appUrl}/sync-block?blockNumber=${blockNumber}`)
         .then(({ data }) => {
           if (data.status === "ok") {
             okCount++;
+            logger.info("sync: sync-blocks completed", blockNumber);
           } else {
             errorCount++;
+            failedBlockNumbers.push(blockNumber);
+            logger.error("sync: sync-blocks failed", blockNumber, data.message);
           }
         })
         .catch((e: AxiosError<{ error: string }>) => {
+          errorCount++;
+          failedBlockNumbers.push(blockNumber);
           logger.error("sync: call sync-blocks failed", blockNumber, e.message);
         })
         .finally(() => {
@@ -53,10 +60,12 @@ app.post("/sync", async (req, res) => {
             const endAt = new Date();
             const timeDiff = getTimeDiff(startAt, endAt);
 
+            logger.info("sync-end: concurrency", env.concurrency);
             logger.info("sync-end: fromBlockNumber", fromBlockNumber);
             logger.info("sync-end: toBlockNumber", toBlockNumber);
             logger.info("sync-end: okCount", okCount);
             logger.info("sync-end: errorCount", errorCount);
+            logger.info("failedBlockNumbers", failedBlockNumbers);
             logger.info("sync-end: timeDiff", timeDiff);
 
             resolve({
@@ -66,20 +75,22 @@ app.post("/sync", async (req, res) => {
               toBlockNumber,
               okCount,
               errorCount,
+              failedBlockNumbers,
               timeDiff,
             });
           }
         });
+      logger.info("sync: sync-blocks called", blockNumber);
     }
   });
+
   res.send(result);
 });
 
-app.post("/sync-blocks", async (req, res) => {
-  const { blockNumbers } = req.body;
-  const result = await syncBlocks(blockNumbers).catch((e) => {
-    logger.error("sync-blocks: syncBlocks failed", blockNumbers, e.message);
-    return { status: "error" };
+app.post("/sync-block", async (req, res) => {
+  const { blockNumber } = req.query;
+  const result = await syncBlocks([Number(blockNumber)]).catch((e) => {
+    return { status: "error", message: e.message };
   });
   res.send(result);
 });

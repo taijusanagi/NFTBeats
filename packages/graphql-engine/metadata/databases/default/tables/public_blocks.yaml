@@ -11,3 +11,10 @@ array_relationships:
         remote_table:
           name: transfers
           schema: public
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - blockNumber
+        - timestamp
+      filter: {}

@@ -21,6 +21,7 @@ export const getBlockNumberRange = async () => {
 };
 
 export const syncBlocks = async (blockNumbers: number[]) => {
+  logger.debug("syncBlocks: start", ...blockNumbers);
   const provider = new TronProvider(env.rpcUrl);
   const getBlockResolved = await Promise.map(
     blockNumbers,
@@ -37,6 +38,9 @@ export const syncBlocks = async (blockNumbers: number[]) => {
     }
   );
   const transactionHashes = getBlockResolved.map(({ transactions }) => transactions).flat();
+
+  logger.debug("syncBlocks: start", ...blockNumbers, "transactionHashesLength", transactionHashes.length);
+
   const getTransactionReceiptResolved = await Promise.map(
     transactionHashes,
     (txHash) => provider.getTransactionReceipt(txHash),
@@ -61,5 +65,7 @@ export const syncBlocks = async (blockNumbers: number[]) => {
     });
     return { status: "ok" };
   });
+
+  logger.debug("syncBlocks: end", ...blockNumbers, "transactionHashesLength", transactionHashes.length);
   return result;
 };
