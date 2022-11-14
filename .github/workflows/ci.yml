@@ -13,5 +13,4 @@ jobs:
       - run: yarn
       - run: yarn lint
       - run: yarn test
-      - run: docker-compose up -d
       - run: yarn build
