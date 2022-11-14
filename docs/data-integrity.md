@@ -1,6 +1,4 @@
-## Test
-
-Data integrity is tested
+## Data integrity
 
 ### Sync
 

@@ -46,7 +46,7 @@ This speed makes data syncing a bit difficult. I had to build a parallel process
 
 And data API should be very flexible, I used Hasura for the GraphQL engine, and it makes development much faster.
 
-## Plan
+## Possible Business Model - Plan
 
 ![plan](./docs/plan.png)
 
