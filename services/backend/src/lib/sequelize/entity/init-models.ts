@@ -6,7 +6,11 @@ import type { TransactionAttributes, TransactionCreationAttributes } from "./tra
 import { Transfer as _Transfer } from "./transfer";
 import type { TransferAttributes, TransferCreationAttributes } from "./transfer";
 
-export { _Block as Block, _Transaction as Transaction, _Transfer as Transfer };
+export {
+  _Block as Block,
+  _Transaction as Transaction,
+  _Transfer as Transfer,
+};
 
 export type {
   BlockAttributes,
@@ -21,6 +25,7 @@ export function initModels(sequelize: Sequelize) {
   const Block = _Block.initModel(sequelize);
   const Transaction = _Transaction.initModel(sequelize);
   const Transfer = _Transfer.initModel(sequelize);
+
 
   return {
     Block: Block,

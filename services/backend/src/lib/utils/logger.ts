@@ -11,6 +11,10 @@ export class Logger {
     }
   }
 
+  info(...message: unknown[]) {
+    _logger.info(message);
+  }
+
   error(...message: unknown[]) {
     _logger.error(message);
   }

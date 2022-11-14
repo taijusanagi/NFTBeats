@@ -4,9 +4,8 @@ import express from "express";
 
 import { env } from "./config/env";
 import { getBlockNumberRange, syncBlocks, syncTransactions } from "./implementation";
-import { Block } from "./lib/sequelize/entity/block";
-import { Transaction } from "./lib/sequelize/entity/transaction";
 import { logger } from "./lib/utils/logger";
+import { SyncBlocksOutput } from "./types/data";
 
 dotenv.config();
 
@@ -25,23 +24,19 @@ app.post("/cron", async (req, res) => {
 
 app.post("/sync", async (req, res) => {
   const { fromBlockNumber, toBlockNumber } = req.body;
-
-  console.log(fromBlockNumber, toBlockNumber);
-
   for (let blockNumber = toBlockNumber; blockNumber >= fromBlockNumber; blockNumber--) {
     axios
       .post(`${env.appUrl}/sync-blocks`, { blockNumbers: [blockNumber] })
-      .then((res: AxiosResponse<{ blocks: Block[]; transactions: Transaction[] }>) => {
-        const { transactions } = res.data;
-        const transactionHashes = transactions.map(({ transactionHash }) => transactionHash);
+      .then((res: AxiosResponse<SyncBlocksOutput>) => {
+        const { transactionHashes } = res.data;
         axios
           .post(`${env.appUrl}/sync-transactions`, { transactionHashes })
           .catch((e: AxiosError<{ error: string }>) => {
-            logger.error("sync-transactions failed", e.message);
+            logger.error("sync: sync-transactions failed", e.message);
           });
       })
       .catch((e: AxiosError<{ error: string }>) => {
-        logger.error("sync-blocks failed", e.message);
+        logger.error("sync: sync-blocks failed", e.message);
       });
   }
   res.send({ status: "ok" });

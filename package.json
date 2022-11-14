@@ -12,25 +12,22 @@
     "node": "16"
   },
   "scripts": {
+    "postinstall": "patch-package",
     "prepare": "husky install",
     "lint": "run-p lint:*",
     "lint:app": "yarn workspace @nftbeats/app lint",
-    "lint:backend": "yarn workspace @nftbeats/backend lint",
     "lint:contracts": "yarn workspace @nftbeats/contracts lint",
     "test": "run-p test:*",
     "test:contracts": "yarn workspace @nftbeats/contracts test",
     "predev": "yarn prebuild",
     "dev": "run-p dev:*",
     "dev:app": "yarn workspace @nftbeats/app dev",
-    "dev:backend": "yarn workspace @nftbeats/backend dev",
     "dev:graphql-engine": "yarn workspace @nftbeats/graphql-engine dev",
     "prebuild": "wait-on http-get://localhost:3001/healthz -t 300000 && run-p prebuild:*",
     "prebuild:contracts": "yarn workspace @nftbeats/contracts build",
     "build": "run-p build:*",
     "build:app": "yarn workspace @nftbeats/app build",
-    "build:backend": "yarn workspace @nftbeats/backend build",
-    "start": "yarn workspace @nftbeats/backend start",
-    "croundrun-deploy": "gcloud run deploy nftbeats-backend --source ./packages/backend --region asia-northeast1 --allow-unauthenticated"
+    "croundrun-deploy": "gcloud run deploy nftbeats-backend --source ./services/backend --region asia-northeast1 --allow-unauthenticated"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
@@ -39,6 +36,7 @@
     "lint-staged": "^13.0.3",
     "npm-run-all": "^4.1.5",
     "npm-watch": "^0.11.0",
+    "patch-package": "^6.5.0",
     "wait-on": "^6.0.1"
   },
   "lint-staged": {

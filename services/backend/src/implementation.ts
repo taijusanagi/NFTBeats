@@ -4,11 +4,9 @@ import { ethers } from "ethers";
 import { env } from "./config/env";
 import { getERC721TransfersFromLogs } from "./lib/contracts/parse";
 import { models, sequelize } from "./lib/sequelize";
-import { Block } from "./lib/sequelize/entity/block";
-import { Transaction } from "./lib/sequelize/entity/transaction";
-import { Transfer } from "./lib/sequelize/entity/transfer";
 import { TronProvider } from "./lib/tron/provider";
 import { logger } from "./lib/utils/logger";
+import { SyncBlocksOutput, SyncTransactionsOutput } from "./types/data";
 
 const provider = new TronProvider(env.rpcUrl);
 
@@ -24,7 +22,7 @@ export const getBlockNumberRange = async () => {
   return { fromBlockNumber, toBlockNumber };
 };
 
-export const syncBlocks = async (blockNumbers: number[]) => {
+export const syncBlocks = async (blockNumbers: number[]): Promise<SyncBlocksOutput> => {
   logger.debug("syncBlocks", blockNumbers);
   const getBlockResolved = await Promise.map(
     blockNumbers,
@@ -40,56 +38,41 @@ export const syncBlocks = async (blockNumbers: number[]) => {
       concurrency: env.concurrency,
     }
   ).catch((e) => {
-    logger.error("fetch fail:", e.message);
+    logger.error("syncBlocks: fetch fail:", e.message);
     return [];
   });
-  const blockRecords = getBlockResolved.map(({ number, timestamp }) => {
+  const blockRecords = getBlockResolved.map(({ number, timestamp, transactions }) => {
     return {
       blockNumber: Number(number),
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       timestamp: Number(timestamp) as any,
+      expectedTransactionCount: transactions.length,
     };
   });
-  const transactionRecords = getBlockResolved
-    .map(({ number, transactions }) => {
-      return transactions.map((transactionHash, i) => {
-        return {
-          blockNumber: Number(number),
-          transactionIndex: i,
-          transactionHash,
-        };
-      });
-    })
-    .flat();
+  const transactionHashes = getBlockResolved.map(({ transactions }) => transactions).flat();
   const result = await sequelize
     .transaction(async (t) => {
-      const blocks = await models.Block.bulkCreate(blockRecords, {
+      await models.Block.bulkCreate(blockRecords, {
         ignoreDuplicates: true,
         transaction: t,
       });
-      const transactions = await models.Transaction.bulkCreate(transactionRecords, {
-        ignoreDuplicates: true,
-        transaction: t,
-      });
-      return { blocks, transactions };
+      return { transactionHashes };
     })
     .catch((e) => {
-      logger.error("save fail:", e.message);
-      const blocks = [] as Block[];
-      const transactions = [] as Transaction[];
-      return { blocks, transactions };
+      logger.error("syncBlocks: save fail:", e.message);
+      return { transactionHashes: [] as string[] };
     });
   return result;
 };
 
-export const syncTransactions = async (transactionHashes: string[]) => {
+export const syncTransactions = async (transactionHashes: string[]): Promise<SyncTransactionsOutput> => {
   logger.debug("syncTransactions", transactionHashes);
   const getTransactionReceiptResolved = await Promise.map(
     transactionHashes,
     (txHash) => provider.getTransactionReceipt(txHash),
     { concurrency: env.concurrency }
   ).catch((e) => {
-    logger.error("fetch fail:", e.message);
+    logger.error("syncTransactions: fetch fail:", e.message);
     return [] as ethers.providers.TransactionReceipt[];
   });
   const transactionRecords = getTransactionReceiptResolved.map(({ blockNumber, transactionIndex, transactionHash }) => {
@@ -97,27 +80,22 @@ export const syncTransactions = async (transactionHashes: string[]) => {
       blockNumber,
       transactionIndex,
       transactionHash,
-      isSynced: true,
     };
   });
   const transferRecords = getTransactionReceiptResolved.map(({ logs }) => getERC721TransfersFromLogs(logs)).flat();
-  const result = await sequelize
+  await sequelize
     .transaction(async (t) => {
-      const transactions = await models.Transaction.bulkCreate(transactionRecords, {
-        updateOnDuplicate: ["isSynced"],
-        transaction: t,
-      });
-      const transfers = await models.Transfer.bulkCreate(transferRecords, {
+      await models.Transaction.bulkCreate(transactionRecords, {
         ignoreDuplicates: true,
         transaction: t,
       });
-      return { transactions, transfers };
+      await models.Transfer.bulkCreate(transferRecords, {
+        ignoreDuplicates: true,
+        transaction: t,
+      });
     })
     .catch((e) => {
-      logger.error("save fail:", e.message);
-      const transactions = [] as Transaction[];
-      const transfers = [] as Transfer[];
-      return { transactions, transfers };
+      logger.error("syncTransactions: save fail:", e.message);
     });
-  return result;
+  
 };

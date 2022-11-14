@@ -34,5 +34,13 @@ services:
       ## uncomment next line to set an admin secret
       # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
       HASURA_GRAPHQL_SERVER_PORT: 3001
+  backend:
+    build:
+      context: ./services/backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "postgres"
 volumes:
   db_data:
