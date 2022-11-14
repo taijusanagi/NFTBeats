@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="./styles/graphdoc.css" />
+    <title>transfers_aggregate_bool_exp</title>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet"><link type="text/css" rel="stylesheet" href="./assets/code.css" /><link type="text/css" rel="stylesheet" href="./assets/require-by.css" />
+</head>
+<body class="slds-scrollable--y">
+    <nav class="slds-grid slds-grid--vertical slds-col--rule-right">
+        <header class="slds-p-around--medium slds-col slds-shrik slds-grow-none">
+            <button class="slds-button slds-button--icon slds-float--right js-toggle-navigation less-than-medium">
+                <i class="material-icons">close</i>
+            </button>
+                <h3 class="slds-text-heading--medium"><a href="./">GraphQL Schema</a></h3>
+            <div class="slds-p-top--small">
+                <input id="type-search" type="text" placeholder="Search a type" autofocus="" class="slds-input" />
+            </div>
+        </header>
+        <div id="navication-scroll" class="slds-scrollable--y slds-col slds-grow">
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Schema</h4>
+    <ul>
+        <li  title="query_root">
+            <a href="query_root.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                query_root
+            </a>
+        </li>
+        <li  title="mutation_root">
+            <a href="mutation_root.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                mutation_root
+            </a>
+        </li>
+        <li  title="subscription_root">
+            <a href="subscription_root.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                subscription_root
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Scalars</h4>
+    <ul>
+        <li  title="Boolean">
+            <a href="boolean.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Boolean
+            </a>
+        </li>
+        <li  title="Float">
+            <a href="float.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Float
+            </a>
+        </li>
+        <li  title="Int">
+            <a href="int.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Int
+            </a>
+        </li>
+        <li  title="numeric">
+            <a href="numeric.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                numeric
+            </a>
+        </li>
+        <li  title="String">
+            <a href="string.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                String
+            </a>
+        </li>
+        <li  title="timestamptz">
+            <a href="timestamptz.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                timestamptz
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Enums</h4>
+    <ul>
+        <li  title="blocks_constraint">
+            <a href="blocks_constraint.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_constraint
+            </a>
+        </li>
+        <li  title="blocks_select_column">
+            <a href="blocks_select_column.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_select_column
+            </a>
+        </li>
+        <li  title="blocks_update_column">
+            <a href="blocks_update_column.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_update_column
+            </a>
+        </li>
+        <li  title="cursor_ordering">
+            <a href="cursor_ordering.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                cursor_ordering
+            </a>
+        </li>
+        <li  title="order_by">
+            <a href="order_by.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                order_by
+            </a>
+        </li>
+        <li  title="transfers_constraint">
+            <a href="transfers_constraint.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_constraint
+            </a>
+        </li>
+        <li  title="transfers_select_column">
+            <a href="transfers_select_column.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_select_column
+            </a>
+        </li>
+        <li  title="transfers_update_column">
+            <a href="transfers_update_column.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_update_column
+            </a>
+        </li>
+        <li  title="__TypeKind">
+            <a href="typekind.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __TypeKind
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Objects</h4>
+    <ul>
+        <li  title="blocks">
+            <a href="blocks.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks
+            </a>
+        </li>
+        <li  title="blocks_aggregate">
+            <a href="blocks_aggregate.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_aggregate
+            </a>
+        </li>
+        <li  title="blocks_aggregate_fields">
+            <a href="blocks_aggregate_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_aggregate_fields
+            </a>
+        </li>
+        <li  title="blocks_avg_fields">
+            <a href="blocks_avg_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_avg_fields
+            </a>
+        </li>
+        <li  title="blocks_max_fields">
+            <a href="blocks_max_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_max_fields
+            </a>
+        </li>
+        <li  title="blocks_min_fields">
+            <a href="blocks_min_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_min_fields
+            </a>
+        </li>
+        <li  title="blocks_mutation_response">
+            <a href="blocks_mutation_response.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_mutation_response
+            </a>
+        </li>
+        <li  title="blocks_stddev_fields">
+            <a href="blocks_stddev_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_stddev_fields
+            </a>
+        </li>
+        <li  title="blocks_stddev_pop_fields">
+            <a href="blocks_stddev_pop_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_stddev_pop_fields
+            </a>
+        </li>
+        <li  title="blocks_stddev_samp_fields">
+            <a href="blocks_stddev_samp_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_stddev_samp_fields
+            </a>
+        </li>
+        <li  title="blocks_sum_fields">
+            <a href="blocks_sum_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_sum_fields
+            </a>
+        </li>
+        <li  title="blocks_var_pop_fields">
+            <a href="blocks_var_pop_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_var_pop_fields
+            </a>
+        </li>
+        <li  title="blocks_var_samp_fields">
+            <a href="blocks_var_samp_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_var_samp_fields
+            </a>
+        </li>
+        <li  title="blocks_variance_fields">
+            <a href="blocks_variance_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_variance_fields
+            </a>
+        </li>
+        <li  title="transfers">
+            <a href="transfers.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers
+            </a>
+        </li>
+        <li  title="transfers_aggregate">
+            <a href="transfers_aggregate.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_aggregate
+            </a>
+        </li>
+        <li  title="transfers_aggregate_fields">
+            <a href="transfers_aggregate_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_aggregate_fields
+            </a>
+        </li>
+        <li  title="transfers_avg_fields">
+            <a href="transfers_avg_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_avg_fields
+            </a>
+        </li>
+        <li  title="transfers_max_fields">
+            <a href="transfers_max_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_max_fields
+            </a>
+        </li>
+        <li  title="transfers_min_fields">
+            <a href="transfers_min_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_min_fields
+            </a>
+        </li>
+        <li  title="transfers_mutation_response">
+            <a href="transfers_mutation_response.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_mutation_response
+            </a>
+        </li>
+        <li  title="transfers_stddev_fields">
+            <a href="transfers_stddev_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_stddev_fields
+            </a>
+        </li>
+        <li  title="transfers_stddev_pop_fields">
+            <a href="transfers_stddev_pop_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_stddev_pop_fields
+            </a>
+        </li>
+        <li  title="transfers_stddev_samp_fields">
+            <a href="transfers_stddev_samp_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_stddev_samp_fields
+            </a>
+        </li>
+        <li  title="transfers_sum_fields">
+            <a href="transfers_sum_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_sum_fields
+            </a>
+        </li>
+        <li  title="transfers_var_pop_fields">
+            <a href="transfers_var_pop_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_var_pop_fields
+            </a>
+        </li>
+        <li  title="transfers_var_samp_fields">
+            <a href="transfers_var_samp_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_var_samp_fields
+            </a>
+        </li>
+        <li  title="transfers_variance_fields">
+            <a href="transfers_variance_fields.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_variance_fields
+            </a>
+        </li>
+        <li  title="__Directive">
+            <a href="directive.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __Directive
+            </a>
+        </li>
+        <li  title="__EnumValue">
+            <a href="enumvalue.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __EnumValue
+            </a>
+        </li>
+        <li  title="__Field">
+            <a href="field.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __Field
+            </a>
+        </li>
+        <li  title="__InputValue">
+            <a href="inputvalue.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __InputValue
+            </a>
+        </li>
+        <li  title="__Schema">
+            <a href="schema.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __Schema
+            </a>
+        </li>
+        <li  title="__Type">
+            <a href="type.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __Type
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Input Objects</h4>
+    <ul>
+        <li  title="blocks_bool_exp">
+            <a href="blocks_bool_exp.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_bool_exp
+            </a>
+        </li>
+        <li  title="blocks_inc_input">
+            <a href="blocks_inc_input.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_inc_input
+            </a>
+        </li>
+        <li  title="blocks_insert_input">
+            <a href="blocks_insert_input.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_insert_input
+            </a>
+        </li>
+        <li  title="blocks_obj_rel_insert_input">
+            <a href="blocks_obj_rel_insert_input.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_obj_rel_insert_input
+            </a>
+        </li>
+        <li  title="blocks_on_conflict">
+            <a href="blocks_on_conflict.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_on_conflict
+            </a>
+        </li>
+        <li  title="blocks_order_by">
+            <a href="blocks_order_by.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_order_by
+            </a>
+        </li>
+        <li  title="blocks_pk_columns_input">
+            <a href="blocks_pk_columns_input.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_pk_columns_input
+            </a>
+        </li>
+        <li  title="blocks_set_input">
+            <a href="blocks_set_input.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_set_input
+            </a>
+        </li>
+        <li  title="blocks_stream_cursor_input">
+            <a href="blocks_stream_cursor_input.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_stream_cursor_input
+            </a>
+        </li>
+        <li  title="blocks_stream_cursor_value_input">
+            <a href="blocks_stream_cursor_value_input.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_stream_cursor_value_input
+            </a>
+        </li>
+        <li  title="blocks_updates">
+            <a href="blocks_updates.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                blocks_updates
+            </a>
+        </li>
+        <li  title="Int_comparison_exp">
+            <a href="int_comparison_exp.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Int_comparison_exp
+            </a>
+        </li>
+        <li  title="numeric_comparison_exp">
+            <a href="numeric_comparison_exp.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                numeric_comparison_exp
+            </a>
+        </li>
+        <li  title="String_comparison_exp">
+            <a href="string_comparison_exp.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                String_comparison_exp
+            </a>
+        </li>
+        <li  title="timestamptz_comparison_exp">
+            <a href="timestamptz_comparison_exp.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                timestamptz_comparison_exp
+            </a>
+        </li>
+        <li class="slds-is-active" title="transfers_aggregate_bool_exp">
+            <a href="transfers_aggregate_bool_exp.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_aggregate_bool_exp
+            </a>
+        </li>
+        <li  title="transfers_aggregate_bool_exp_count">
+            <a href="transfers_aggregate_bool_exp_count.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_aggregate_bool_exp_count
+            </a>
+        </li>
+        <li  title="transfers_aggregate_order_by">
+            <a href="transfers_aggregate_order_by.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_aggregate_order_by
+            </a>
+        </li>
+        <li  title="transfers_arr_rel_insert_input">
+            <a href="transfers_arr_rel_insert_input.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_arr_rel_insert_input
+            </a>
+        </li>
+        <li  title="transfers_avg_order_by">
+            <a href="transfers_avg_order_by.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_avg_order_by
+            </a>
+        </li>
+        <li  title="transfers_bool_exp">
+            <a href="transfers_bool_exp.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_bool_exp
+            </a>
+        </li>
+        <li  title="transfers_inc_input">
+            <a href="transfers_inc_input.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_inc_input
+            </a>
+        </li>
+        <li  title="transfers_insert_input">
+            <a href="transfers_insert_input.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_insert_input
+            </a>
+        </li>
+        <li  title="transfers_max_order_by">
+            <a href="transfers_max_order_by.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_max_order_by
+            </a>
+        </li>
+        <li  title="transfers_min_order_by">
+            <a href="transfers_min_order_by.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_min_order_by
+            </a>
+        </li>
+        <li  title="transfers_on_conflict">
+            <a href="transfers_on_conflict.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_on_conflict
+            </a>
+        </li>
+        <li  title="transfers_order_by">
+            <a href="transfers_order_by.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_order_by
+            </a>
+        </li>
+        <li  title="transfers_pk_columns_input">
+            <a href="transfers_pk_columns_input.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_pk_columns_input
+            </a>
+        </li>
+        <li  title="transfers_set_input">
+            <a href="transfers_set_input.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_set_input
+            </a>
+        </li>
+        <li  title="transfers_stddev_order_by">
+            <a href="transfers_stddev_order_by.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_stddev_order_by
+            </a>
+        </li>
+        <li  title="transfers_stddev_pop_order_by">
+            <a href="transfers_stddev_pop_order_by.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_stddev_pop_order_by
+            </a>
+        </li>
+        <li  title="transfers_stddev_samp_order_by">
+            <a href="transfers_stddev_samp_order_by.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_stddev_samp_order_by
+            </a>
+        </li>
+        <li  title="transfers_stream_cursor_input">
+            <a href="transfers_stream_cursor_input.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_stream_cursor_input
+            </a>
+        </li>
+        <li  title="transfers_stream_cursor_value_input">
+            <a href="transfers_stream_cursor_value_input.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_stream_cursor_value_input
+            </a>
+        </li>
+        <li  title="transfers_sum_order_by">
+            <a href="transfers_sum_order_by.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_sum_order_by
+            </a>
+        </li>
+        <li  title="transfers_updates">
+            <a href="transfers_updates.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_updates
+            </a>
+        </li>
+        <li  title="transfers_var_pop_order_by">
+            <a href="transfers_var_pop_order_by.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_var_pop_order_by
+            </a>
+        </li>
+        <li  title="transfers_var_samp_order_by">
+            <a href="transfers_var_samp_order_by.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_var_samp_order_by
+            </a>
+        </li>
+        <li  title="transfers_variance_order_by">
+            <a href="transfers_variance_order_by.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                transfers_variance_order_by
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Directives</h4>
+    <ul>
+        <li  title="cached">
+            <a href="cached.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                cached
+            </a>
+        </li>
+        <li  title="include">
+            <a href="include.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                include
+            </a>
+        </li>
+        <li  title="skip">
+            <a href="skip.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                skip
+            </a>
+        </li>
+    </ul>
+</div>
+        </div>
+    </nav>
+    <main><section class="title slds-theme--inverse">
+    <div class="container slds-grid">
+        <div>
+        <button class="slds-button js-toggle-navigation less-than-medium">
+            <i class="material-icons slds-button__icon slds-button__icon--left">menu</i>
+            <span class="slds-text-title--caps">Types<span>
+        </button>
+        </div>
+        </div>
+    </div>
+    <div class="container">
+        <p class="slds-text-title--caps slds-text-color--weak">INPUT_OBJECT</p>
+        <h1 class="slds-text-heading--large">transfers_aggregate_bool_exp</h1>
+        <div class="slds-text-body--regular"></div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <h2 id="graphql-schema-definition" class="graphdoc-section__title slds-text-heading--medium slds-m-top--small">
+            <a href="#graphql-schema-definition">
+                <i class="material-icons">link</i>
+            </a>
+            GraphQL Schema definition
+        </h2>
+        <code class="highlight"><ul class="code" style="padding-left:28px"><li><span class="keyword operator ts">input</span> <span class="identifier">transfers_aggregate_bool_exp</span> {</li><li><span class="tab"><li><span class="tab"><span class="meta">count</span>: <a class="support type" href="transfers_aggregate_bool_exp_count.doc.html">transfers_aggregate_bool_exp_count</a></span></li></span></li><li>}</li></ul></code>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <h2 id="require-by" class="graphdoc-section__title slds-text-heading--medium slds-m-top--small">
+            <a href="#require-by">
+                <i class="material-icons">link</i>
+            </a>
+            Require by
+        </h2>
+        <ul class="require-by"><li><a href="blocks_bool_exp.doc.html" title="blocks_bool_exp - Boolean expression to filter rows from the table &quot;blocks&quot;. All fields are combined with a logical 'AND'.">blocks_bool_exp<em>Boolean expression to filter rows from the table "blocks". All fields are combined with a logical 'AND'.</em></a><li></ul>
+    </div>
+</section>
+<footer>
+<div class="container slds-p-around--large">
+    <p class="slds-text-align--right slds-text-title--caps">
+        Generated with <a href="https://github.com/2fd/graphdoc#readme" target="_blank">graphdoc 2.4.0</a>
+    </p>
+</div>
+</footer>
+</main>
+    <script src="./scripts/focus-active.js"></script>
+    <script src="./scripts/filter-types.js"></script>
+    <script src="./scripts/toggle-navigation.js"></script>
+</body>

@@ -23,7 +23,9 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <Link href="/">Stats</Link>
               </Text>
               <Text color={configJsonFile.style.color.text.tertiary} fontWeight="bold">
-                <Link href="/docs">API</Link>
+                <Link href="/docs/graphql/index.html" target={"_blank"}>
+                  API
+                </Link>
               </Text>
               <Box>
                 <ConnectButton accountStatus={"address"} showBalance={false} chainStatus={"name"} />
