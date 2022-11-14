@@ -30,15 +30,21 @@ That's where NFTBeats comes in. We're the service for tracking NFT on the TRON b
 
 Dune Analytics and Moralis inspire us. Two industry leaders in the world of blockchain data aggregation. And just like them, we're committed to providing our users with the most accurate and up-to-date NFT information possible.
 
+## How it works
+
+![how-it-works](./docs/how-it-works.jpg)
+
+I built an ethers.js provider wrapper for the TRON blockchain, then used the provider to fetch block and transaction receipt data through JSON RPC API, then parse it into the NFT transfer log.
+
+Then the data is served by GraphQL API.
+
 ## Technical Challenge
 
 TRON blockchain block-producing time is 3 seconds, much faster than Ethereum.
 
-This speed makes data syncing a bit difficult, I had to build a parallel processing architecture by google cloud run.
+This speed makes data syncing a bit difficult. I had to build a parallel processing architecture by google cloud run.
 
 And data API should be very flexible, I used Hasura for the GraphQL engine, and it makes development much faster.
-
-![how-it-works](./docs/how-it-works.jpg)
 
 ## Plan
 

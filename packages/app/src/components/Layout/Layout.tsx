@@ -3,6 +3,8 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import React from "react";
 import { FaGithub } from "react-icons/fa";
 
+import { SEO } from "@/components/SEO";
+
 import configJsonFile from "../../../config.json";
 
 export interface LayoutProps {
@@ -12,6 +14,7 @@ export interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <Flex minHeight={"100vh"} direction={"column"} bg={configJsonFile.style.color.bg}>
+      <SEO />
       <Container as="section" maxW="8xl">
         <Box as="nav" py="4">
           <Flex justify="space-between" alignItems={"center"} h="8">
