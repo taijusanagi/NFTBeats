@@ -8,10 +8,9 @@ import { TronProvider } from "./lib/tron/provider";
 import { logger } from "./lib/utils/logger";
 import { SyncBlocksOutput, SyncTransactionsOutput } from "./types/data";
 
-const provider = new TronProvider(env.rpcUrl);
-
 export const getBlockNumberRange = async () => {
   logger.debug("getBlockNumberRange");
+  const provider = new TronProvider(env.rpcUrl);
   const [latestSyncedBlock] = await models.Block.findAll({
     limit: 1,
     order: [["blockNumber", "DESC"]],
@@ -24,6 +23,7 @@ export const getBlockNumberRange = async () => {
 
 export const syncBlocks = async (blockNumbers: number[]): Promise<SyncBlocksOutput> => {
   logger.debug("syncBlocks", blockNumbers);
+  const provider = new TronProvider(env.rpcUrl);
   const getBlockResolved = await Promise.map(
     blockNumbers,
     (blockNumber) =>
@@ -67,6 +67,7 @@ export const syncBlocks = async (blockNumbers: number[]): Promise<SyncBlocksOutp
 
 export const syncTransactions = async (transactionHashes: string[]): Promise<SyncTransactionsOutput> => {
   logger.debug("syncTransactions", transactionHashes);
+  const provider = new TronProvider(env.rpcUrl);
   const getTransactionReceiptResolved = await Promise.map(
     transactionHashes,
     (txHash) => provider.getTransactionReceipt(txHash),
@@ -97,5 +98,4 @@ export const syncTransactions = async (transactionHashes: string[]): Promise<Syn
     .catch((e) => {
       logger.error("syncTransactions: save fail:", e.message);
     });
-  
 };

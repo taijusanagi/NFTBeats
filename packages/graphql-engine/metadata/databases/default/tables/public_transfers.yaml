@@ -2,15 +2,6 @@ table:
   name: transfers
   schema: public
 object_relationships:
-  - name: Block
-    using:
-      manual_configuration:
-        column_mapping:
-          blockNumber: blockNumber
-        insertion_order: null
-        remote_table:
-          name: blocks
-          schema: public
   - name: transaction
     using:
       manual_configuration:
