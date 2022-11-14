@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import React from "react";
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
-import { ChartData } from "@/types/data";
+import { ChartData } from "@/types/ChartData";
 
 import configJsonFile from "../../../config.json";
 
@@ -27,12 +27,12 @@ export const Chart: React.FC<ChartProps> = ({ height, data }) => {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
+          <XAxis dataKey="name" tick={{ fontSize: 12 }} />
           <YAxis />
           <Tooltip />
           <Area
             type="monotone"
-            dataKey="uv"
+            dataKey="count"
             stroke={configJsonFile.style.color.accent}
             fill={configJsonFile.style.color.accent}
           />
