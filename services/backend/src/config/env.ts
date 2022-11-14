@@ -11,10 +11,10 @@ const getEnv = () => {
     rpcUrl: process.env.RPC_URL ? process.env.RPC_URL : "https://api.trongrid.io/jsonrpc",
     dbConnectionUrl: process.env.DB_CONNECTION_URL
       ? process.env.DB_CONNECTION_URL
-      : "postgres://postgres:postgrespassword@postgres:5432/postgres",
+      : "postgres://postgres:postgrespassword@localhost:5432/postgres",
 
     concurrency: process.env.CUNCURRENCY ? Number(process.env.CUNCURRENCY) : 5,
-    syncRangeLimit: process.env.SYNC_RANGE_LIMIT ? Number(process.env.SYNC_RANGE_LIMIT) : 30,
+    syncRangeLimit: process.env.SYNC_RANGE_LIMIT ? Number(process.env.SYNC_RANGE_LIMIT) : 25,
     isGcp,
     // the following values are validated already
     dbName: process.env.DB_NAME || "",

@@ -1,11 +1,11 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosError } from "axios";
 import * as dotenv from "dotenv";
 import express from "express";
 
 import { env } from "./config/env";
-import { getBlockNumberRange, syncBlocks, syncTransactions } from "./implementation";
+import { getBlockNumberRange, syncBlocks } from "./implementation";
 import { logger } from "./lib/utils/logger";
-import { SyncBlocksOutput } from "./types/data";
+import { getTimeDiff } from "./lib/utils/time";
 
 dotenv.config();
 
@@ -16,41 +16,71 @@ app.get("/", (req, res) => {
   res.send(`ok`);
 });
 
-app.post("/cron", async (req, res) => {
-  const { fromBlockNumber, toBlockNumber } = await getBlockNumberRange();
-  axios.post(`${env.appUrl}/sync`, { fromBlockNumber, toBlockNumber });
-  res.send({ status: "ok" });
-});
-
 app.post("/sync", async (req, res) => {
-  const { fromBlockNumber, toBlockNumber } = req.body;
-  for (let blockNumber = toBlockNumber; blockNumber >= fromBlockNumber; blockNumber--) {
-    axios
-      .post(`${env.appUrl}/sync-blocks`, { blockNumbers: [blockNumber] })
-      .then((res: AxiosResponse<SyncBlocksOutput>) => {
-        const { transactionHashes } = res.data;
-        axios
-          .post(`${env.appUrl}/sync-transactions`, { transactionHashes })
-          .catch((e: AxiosError<{ error: string }>) => {
-            logger.error("sync: sync-transactions failed", e.message);
-          });
-      })
-      .catch((e: AxiosError<{ error: string }>) => {
-        logger.error("sync: sync-blocks failed", e.message);
-      });
-  }
-  res.send({ status: "ok" });
+  logger.info("sync");
+
+  const startAt = new Date();
+
+  const { latestSyncedBlockNumber, currentBlockNumber, fromBlockNumber, toBlockNumber } = await getBlockNumberRange();
+
+  logger.info("sync-start: latestSyncedBlockNumber", latestSyncedBlockNumber);
+  logger.info("sync-start: currentBlockNumber", currentBlockNumber);
+
+  logger.info("sync-start: fromBlockNumber", fromBlockNumber);
+  logger.info("sync-start: toBlockNumber", toBlockNumber);
+
+  const expectedCount = toBlockNumber - fromBlockNumber + 1;
+  let processedCount = 0;
+  let okCount = 0;
+  let errorCount = 0;
+  const result = await new Promise((resolve) => {
+    for (let blockNumber = toBlockNumber; blockNumber >= fromBlockNumber; blockNumber--) {
+      axios
+        .post(`${env.appUrl}/sync-blocks`, { blockNumbers: [blockNumber] })
+        .then(({ data }) => {
+          if (data.status === "ok") {
+            okCount++;
+          } else {
+            errorCount++;
+          }
+        })
+        .catch((e: AxiosError<{ error: string }>) => {
+          logger.error("sync: call sync-blocks failed", blockNumber, e.message);
+        })
+        .finally(() => {
+          processedCount++;
+          if (processedCount === expectedCount) {
+            const endAt = new Date();
+            const timeDiff = getTimeDiff(startAt, endAt);
+
+            logger.info("sync-end: fromBlockNumber", fromBlockNumber);
+            logger.info("sync-end: toBlockNumber", toBlockNumber);
+            logger.info("sync-end: okCount", okCount);
+            logger.info("sync-end: errorCount", errorCount);
+            logger.info("sync-end: timeDiff", timeDiff);
+
+            resolve({
+              latestSyncedBlockNumber,
+              currentBlockNumber,
+              fromBlockNumber,
+              toBlockNumber,
+              okCount,
+              errorCount,
+              timeDiff,
+            });
+          }
+        });
+    }
+  });
+  res.send(result);
 });
 
 app.post("/sync-blocks", async (req, res) => {
   const { blockNumbers } = req.body;
-  const result = await syncBlocks(blockNumbers);
-  res.send(result);
-});
-
-app.post("/sync-transactions", async (req, res) => {
-  const { transactionHashes } = req.body;
-  const result = await syncTransactions(transactionHashes);
+  const result = await syncBlocks(blockNumbers).catch((e) => {
+    logger.error("sync-blocks: syncBlocks failed", blockNumbers, e.message);
+    return { status: "error" };
+  });
   res.send(result);
 });
 

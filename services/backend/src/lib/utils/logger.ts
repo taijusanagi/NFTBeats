@@ -1,22 +1,18 @@
-import pino from "pino";
-
 import { env } from "../../config/env";
-
-const _logger = pino();
 
 export class Logger {
   debug(...message: unknown[]) {
     if (env.isDebugLogEnabled) {
-      _logger.debug(message);
+      console.log(...message);
     }
   }
 
   info(...message: unknown[]) {
-    _logger.info(message);
+    console.log(...message);
   }
 
   error(...message: unknown[]) {
-    _logger.error(message);
+    console.error(...message);
   }
 }
 

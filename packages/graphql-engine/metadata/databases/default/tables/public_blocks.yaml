@@ -2,12 +2,12 @@ table:
   name: blocks
   schema: public
 array_relationships:
-  - name: transactions
+  - name: transfers
     using:
       manual_configuration:
         column_mapping:
           blockNumber: blockNumber
         insertion_order: null
         remote_table:
-          name: transactions
+          name: transfers
           schema: public

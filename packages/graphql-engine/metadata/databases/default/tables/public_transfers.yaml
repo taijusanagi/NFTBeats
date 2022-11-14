@@ -2,13 +2,12 @@ table:
   name: transfers
   schema: public
 object_relationships:
-  - name: transaction
+  - name: block
     using:
       manual_configuration:
         column_mapping:
           blockNumber: blockNumber
-          transactionIndex: transactionIndex
         insertion_order: null
         remote_table:
-          name: transactions
+          name: blocks
           schema: public

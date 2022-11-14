@@ -1,3 +1,2 @@
 - "!include public_blocks.yaml"
-- "!include public_transactions.yaml"
 - "!include public_transfers.yaml"
