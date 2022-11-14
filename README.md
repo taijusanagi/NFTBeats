@@ -56,7 +56,8 @@ Successfully built the syncing backend and API with a beautiful frontend
 
 ## What we learned
 
-- TRON and Ethereum difference
+- TRON and Ethereum's difference
+
 - How to build a backend to sync blockchain information
 
 ## What's next for NFTBeats

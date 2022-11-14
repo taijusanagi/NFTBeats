@@ -37,9 +37,9 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                   Docs
                 </Link>
               </Text>
-              <Box>
+              {/* <Box>
                 <ConnectButton accountStatus={"address"} showBalance={false} chainStatus={"name"} />
-              </Box>
+              </Box> */}
             </HStack>
           </Flex>
         </Box>

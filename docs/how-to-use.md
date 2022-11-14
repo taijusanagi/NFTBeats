@@ -1,10 +1,10 @@
-## How to use
+## How to use NFTBeats
 
 ### Top Page
 
 ![stats](./stats.png)
 
-- Top page is stats data, and you can access API & docs from top menu bar.
+- The top page is stats data, and you can access API & docs from the top menu bar.
 
 ### API
 
@@ -14,9 +14,9 @@ https://cloud.hasura.io/public/graphiql?endpoint=https%3A%2F%2Fcrucial-wasp-27.h
 
 ![api](./api.png)
 
-- Left side is exproler to build query
-- When you run the query, the result is displayed right side
-- Only limited queries are served in hackathon, please create PR for more data!
+- The left side is the explorer to build the query.
+- When you run the query, the result is displayed right side.
+- Only limited queries are served in the hackathon. Please create PR for more data!
 
 ### Docs
 
@@ -26,4 +26,4 @@ https://nftbeats.vercel.app/docs/graphql/blocks.doc.html
 
 ![api](./docs.png)
 
-- This is detailed GraphQL endpoint for developer
+- This is a detailed GraphQL endpoint for the developer
